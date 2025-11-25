@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Таблица 'lk_client'
@@ -73,12 +73,26 @@ class Client extends Model
     ];
 
     /**
-     * Получение приложения
+     * Получение интеграций
      *
      * @return HasMany
+     *
+     * @see $apps
      */
     public function apps(): HasMany
     {
         return $this->hasMany(App::class, 'client_id');
+    }
+
+    /**
+     * Получение настроек приложения
+     *
+     * @return HasOne
+     *
+     * @see $apps
+     */
+    public function feedbackSettings(): HasOne
+    {
+        return $this->hasOne(FeedbackSettings::class, 'clientId', 'id');
     }
 }
