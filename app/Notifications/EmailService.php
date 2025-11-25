@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Notifications;
+
+use App\Interfaces\ServiceNotification;
+use App\Models\App;
+
+class EmailService implements ServiceNotification
+{
+    public function __construct(public App $app)
+    {
+    }
+
+    public function send()
+    {
+        $email = json_decode($this->app->param)['email'];
+
+        echo $email;
+    }
+}

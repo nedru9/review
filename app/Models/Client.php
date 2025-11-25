@@ -36,6 +36,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @var int $is_contract
  * @var int $is_notify
  * @var string $comment
+ *
+ * @var App[] $apps
  */
 class Client extends Model
 {
