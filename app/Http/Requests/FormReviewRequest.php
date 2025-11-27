@@ -6,16 +6,16 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class FormReviewRequest extends FormRequest
 {
+
     /**
      * Правила валидации
      *
-     * @return array{fullName: string, email: string, phone: array{0: string, 1: string}, token: string, message: array{0: string, 1: string, 2: string}}
+     * @return array{fullName: string, phone: array{0: string, 1: string}, reviewText: array{0: string, 1: string, 2: string}}
      */
     public function rules(): array
     {
         return [
             'fullName' => 'required|min:2|max:50',
-            'email' => 'required|email',
             'phone' => ['required', 'regex:/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/'],
             'reviewText' => ['required', 'min:10', 'max:1000']
         ];
@@ -30,7 +30,6 @@ class FormReviewRequest extends FormRequest
     {
         return [
             'required' => 'Поле «:attribute» обязательно.',
-            'email' => 'Поле «:attribute» должно быть корректным email.',
             'min' => 'Поле :attribute» должно быть не короче :min символов.',
             'max' => 'Поле «:attribute» должно быть не больше :max символов.',
             'regex' => 'Поле «:attribute» имеет неверный формат.',
@@ -45,8 +44,7 @@ class FormReviewRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'fullName' => 'ФИО',
-            'email' => 'E-mail',
+            'fullName' => 'Имя',
             'phone' => 'Номер телефона',
             'reviewText' => 'Отзыв',
         ];

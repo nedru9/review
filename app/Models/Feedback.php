@@ -28,7 +28,6 @@ class Feedback extends Model
         'reviewText',
         'fullName',
         'phone',
-        'email',
         'dateCreate',
     ];
 

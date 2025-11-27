@@ -15,14 +15,8 @@
         <div class="mb-4">
             <input value="{{ old('fullName') }}" name="fullName"
                    class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                   id="fullName" type="text" placeholder="ФИО*">
+                   id="fullName" type="text" placeholder="Имя*">
             <span class="error-text text-red-500" data-error="fullName"></span>
-        </div>
-        <div class="mb-4">
-            <input value="{{ old('email') }}" name="email"
-                   class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                   id="email" type="email" placeholder="Email*">
-            <span class="error-text text-red-500" data-error="email"></span>
         </div>
         <div class="mb-4">
             <input value="{{ old('phone') }}" name="phone"

@@ -49,12 +49,11 @@ class ReviewController extends Controller
                 'reviewText' => $data['reviewText'] ?? null,
                 'fullName' => $data['fullName'] ?? null,
                 'phone' => $data['phone'] ?? null,
-                'email' => $data['email'] ?? null,
                 'dateCreate' => now(),
             ]);
 
             foreach ($client->apps as $app) {
-                $service = ServiceNotificationFactory::create($app);
+                $service = ServiceNotificationFactory::create($app, $feedback);
                 $service->send();
             }
 

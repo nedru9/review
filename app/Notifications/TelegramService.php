@@ -4,6 +4,7 @@ namespace App\Notifications;
 
 use App\Interfaces\ServiceNotification;
 use App\Models\App;
+use App\Models\Feedback;
 use Exception;
 use RuntimeException;
 use Telegram\Bot\Api;
@@ -16,7 +17,7 @@ class TelegramService implements ServiceNotification
     /**
      * @throws TelegramSDKException
      */
-    public function __construct(public App $app)
+    public function __construct(public App $app, public Feedback $feedback)
     {
         $this->telegram = new Api(config('telegram.bot_token'));
     }
@@ -32,8 +33,8 @@ class TelegramService implements ServiceNotification
         $chatId = $params->chatId;
 
         $text = "Новый отзыв!\n"
-            . "Клиент: {$this->app->client->name}\n"
-            . "Приложение: {$this->app->name}";
+            . "Клиент: \n"
+            . "Приложение: ";
 
         try {
             $this->telegram->sendMessage([
@@ -41,7 +42,7 @@ class TelegramService implements ServiceNotification
                 'text' => $text,
                 'parse_mode' => 'HTML'
             ]);
-        } catch (Exception) {
+        } catch (Exception $e) {
             throw new RuntimeException("Ошибка отправки отзыва в интеграции");
         }
 
