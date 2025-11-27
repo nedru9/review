@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ResponseJson;
 use App\Http\Requests\FormReviewRequest;
 use App\Http\Requests\TokenRequest;
 use App\Models\Client;
+use App\Models\Feedback;
+use App\Notifications\ServiceNotificationFactory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class ReviewController extends Controller
 {
@@ -26,26 +33,39 @@ class ReviewController extends Controller
      * Отправка отзыва
      *
      * @param FormReviewRequest $request
+     * @param Client $client
      *
-     * @return Factory|View
+     * @return Factory|View|JsonResponse
      */
-    public function sendReviewForm(FormReviewRequest $request): Factory|View
+    public function sendReviewForm(FormReviewRequest $request, Client $client): Factory|View|JsonResponse
     {
         $data = $request->validated();
 
-//            /* @var Client $client */
-//            $client = Client::where('token', $token)->first();
-//
-//
-//            // тут сохранение отзыва в БД
-//
-//
-//            foreach ($client->apps as $app) {
-//                $service = ServiceNotificationFactory::create($app);
-//                $service->send();
-//            }
+        try {
+            DB::beginTransaction();
 
-        return view('partials.success-send');
+            $feedback = Feedback::create([
+                'clientId' => $client->id,
+                'reviewText' => $data['reviewText'] ?? null,
+                'fullName' => $data['fullName'] ?? null,
+                'phone' => $data['phone'] ?? null,
+                'email' => $data['email'] ?? null,
+                'dateCreate' => now(),
+            ]);
+
+            foreach ($client->apps as $app) {
+                $service = ServiceNotificationFactory::create($app);
+                $service->send();
+            }
+
+            DB::commit();
+
+            return view('partials.success-send');
+        } catch (Throwable $e) {
+            DB::rollBack();
+
+            return ResponseJson::ajaxError($e->getMessage());
+        }
     }
 
     /**

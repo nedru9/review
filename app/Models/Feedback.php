@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *
  * @var int $id
  * @var int $clientId Id компании
- * @var int $rating Рейтинг
  * @var string $reviewText Текст отзыва
  * @var string $fullName ФИО клиента
  * @var string $phone Номер телефона
@@ -22,10 +21,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Feedback extends Model
 {
     protected $table = 'lk_feedback';
+    public $timestamps = false;
 
     protected $fillable = [
         'clientId',
-        'rating',
         'reviewText',
         'fullName',
         'phone',

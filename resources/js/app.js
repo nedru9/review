@@ -2,110 +2,105 @@ import './bootstrap';
 import $ from 'jquery';
 import Inputmask from "inputmask";
 
-$(document).ready(function() {
+$(document).ready(function () {
+    // Настройка CSRF для AJAX
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
 
-    const mask = new Inputmask("+7 (999) 999-99-99");
+    // Маска телефона с делегированием
+    const phoneMask = new Inputmask("+7 (999) 999-99-99");
 
     const applyMask = () => {
         document.querySelectorAll('input[name="phone"]').forEach(el => {
-            if (!el.inputmask) mask.mask(el);
+            if (!el.inputmask) phoneMask.mask(el);
         });
     };
 
-    // При загрузке
+    // Применяем при загрузке страницы
     applyMask();
 
-    // При любых изменениях DOM (динамические поля)
+    // Авто-применение для динамически добавленных полей
     const observer = new MutationObserver(applyMask);
-    observer.observe(document.body, { childList: true, subtree: true });
+    observer.observe(document.body, {childList: true, subtree: true});
 
+    // Рейтинг звезд
     let selectedRating = 0;
 
-    $('.rating-star-block-icon span, .rating-star-block-icon a').hover(
-        function() {
-            const index = $(this).index();
-            $(this).parent().children().each(function(i) {
-                if (i <= index) {
-                    $(this).find('.rating-star-icon').removeClass('gray').addClass('yellow');
-                } else {
-                    $(this).find('.rating-star-icon').removeClass('yellow').addClass('gray');
-                }
-            });
-        },
-        function() {
-            $(this).parent().children().each(function(i) {
-                if (i < selectedRating) {
-                    $(this).find('.rating-star-icon').removeClass('gray').addClass('yellow');
-                } else {
-                    $(this).find('.rating-star-icon').removeClass('yellow').addClass('gray');
-                }
-            });
-        }
-    );
+    const updateStars = (container, rating) => {
+        container.children().each((i, el) => {
+            const star = $(el).find('.rating-star-icon');
+            star.toggleClass('yellow', i < rating);
+            star.toggleClass('gray', i >= rating);
+        });
+    };
 
-    $('.rating-star-block-icon span, .rating-star-block-icon a').click(function() {
+    // Ховер по звёздам
+    $('.rating-star-block-icon').on('mouseenter', 'span, a', function () {
+        const index = $(this).index();
+        updateStars($(this).parent(), index + 1);
+    });
+
+    $('.rating-star-block-icon').on('mouseleave', 'span, a', function () {
+        updateStars($(this).parent(), selectedRating);
+    });
+
+    // Клик по звезде
+    $('.rating-star-block-icon').on('click', 'span, a', function () {
         selectedRating = $(this).index() + 1;
-        $('.rating-star-block-icon .rating-star-icon').removeClass('gray');
-        $('.rating-star-block-icon .rating-star-icon').each(function(i) {
-            if (i < selectedRating) {
-                $(this).removeClass('gray').addClass('yellow');
-            } else {
-                $(this).removeClass('yellow').addClass('gray');
+        updateStars($(this).parent(), selectedRating);
+    });
+
+    // Плохой отзыв (показ формы)
+    $('.rating-star-block-icon').on('click', 'span.bad', function () {
+        const token = $(this).data('token');
+
+        $.ajax({
+            url: '/review/get-form',
+            type: 'POST',
+            data: {token},
+            success: function (response) {
+                $('.bad-review').html(response).show();
+            },
+            error: function (xhr) {
+                console.error('Ошибка при загрузке формы:', xhr);
             }
         });
     });
 
-    $('.rating-star-block-icon span').click(function() {
-        if ($(this).hasClass('bad')) {
-            let token = $(this).data('token');
-
-            $.ajax({
-                url: '/review/get-form',
-                type: 'POST',
-                data: {
-                    token: token
-                },
-                success: function(response) {
-                    $('.bad-review').html(response).show();
-                },
-                error: function(xhr) {
-                    console.error('Ошибка при загрузке формы:', xhr);
-                }
-            });
-        } else {
-            $('.bad-review').hide();
-        }
-    });
-
-    $('.bad-review').on('click', '.cancel-form', function() {
+    // Скрытие формы
+    $('.bad-review').on('click', '.cancel-form', function () {
         $('.bad-review').hide();
-        $('.rating-star-icon').removeClass('gray').addClass('yellow');
+        updateStars($('.rating-star-block-icon'), selectedRating);
     });
 
-    $('.bad-review').on('submit', '#send-form', function(e) {
+    // Отправка формы плохого отзыва
+    $('.bad-review').on('submit', '#send-form', function (e) {
         e.preventDefault();
 
-        $('.error-text').text(''); // Очистка ошибок
+        const $form = $(this);
+        const token = $form.data('token');
+
+        $('.error-text').text(''); // очистка ошибок
 
         $.ajax({
-            url: '/review/send-form',
+            url: `/review/${token}/send-review`,
             type: 'POST',
-            data: $(this).serialize(),
-            success: function(response) {
+            data: $form.serialize(),
+            success: function (response) {
                 $('.bad-review').html(response).show();
             },
-            error: function(xhr) {
-                if (xhr.status === 422) {
-                    let errors = xhr.responseJSON.errors;
-
-                    $.each(errors, function(field, messages) {
-                        $('[data-error="'+field+'"]').text(messages[0]);
+            error: function (xhr) {
+                if (xhr.status === 422 && xhr.responseJSON.errors) {
+                    const errors = xhr.responseJSON.errors;
+                    $.each(errors, (field, messages) => {
+                        $(`[data-error="${field}"]`).text(messages[0]);
                     });
+                } else {
+                    console.log(xhr);
+                    $(`[data-error="allError"]`).text(xhr.responseJSON.message);
                 }
             }
         });

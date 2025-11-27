@@ -17,8 +17,7 @@ class FormReviewRequest extends FormRequest
             'fullName' => 'required|min:2|max:50',
             'email' => 'required|email',
             'phone' => ['required', 'regex:/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/'],
-            'token' => 'required',
-            'message' => ['required', 'min:10', 'max:1000']
+            'reviewText' => ['required', 'min:10', 'max:1000']
         ];
     }
 
@@ -49,8 +48,7 @@ class FormReviewRequest extends FormRequest
             'fullName' => 'ФИО',
             'email' => 'E-mail',
             'phone' => 'Номер телефона',
-            'token' => 'Токен',
-            'message' => 'Отзыв',
+            'reviewText' => 'Отзыв',
         ];
     }
 }

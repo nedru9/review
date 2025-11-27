@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use App\Models\App;
+use Telegram\Bot\Exceptions\TelegramSDKException;
 
 class ServiceNotificationFactory
 {
@@ -15,6 +16,8 @@ class ServiceNotificationFactory
      * @param App $app
      *
      * @return EmailService|TelegramService
+     *
+     * @throws TelegramSDKException
      */
     static function create(App $app): EmailService|TelegramService
     {
