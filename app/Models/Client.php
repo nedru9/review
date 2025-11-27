@@ -44,32 +44,9 @@ class Client extends Model
     protected $table = 'lk_client';
 
     protected $fillable = [
-        'title',
-        'title_full',
-        'brand',
-        'logo',
-        'managment',
-        'phone',
-        'email',
-        'type',
-        'params',
-        'details',
-        'bank',
-        'addr',
-        'code',
-        'status',
-        'manager_id',
-        'tz',
-        'dt',
-        'token',
-        'balancecontrol',
-        'partner',
-        'server',
-        'filial',
-        'promised_payment',
-        'is_contract',
-        'is_notify',
-        'comment',
+        'title', 'title_full', 'brand', 'logo', 'managment', 'phone', 'email', 'type', 'params', 'details', 'bank',
+        'addr', 'code', 'status', 'manager_id', 'tz', 'dt', 'token', 'balancecontrol', 'partner', 'server', 'filial',
+        'promised_payment', 'is_contract', 'is_notify', 'comment',
     ];
 
     /**
@@ -94,5 +71,15 @@ class Client extends Model
     public function feedbackSettings(): HasOne
     {
         return $this->hasOne(FeedbackSettings::class, 'clientId', 'id');
+    }
+
+    /**
+     * Какое поле модели использовать для поиска записи при Route Model Binding
+     *
+     * @return string
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'token';
     }
 }

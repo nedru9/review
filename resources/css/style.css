@@ -1,0 +1,635 @@
+body {
+    font-family: Arial, sans-serif !important;
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    margin: 0;
+}
+
+
+/* NEW */
+.rating-star-icon
+{
+    cursor: pointer;
+    font-size: 18px;
+}
+
+
+
+
+.gray
+{
+    color: #eaeaf2;
+}
+.yellow
+{
+    color: #fad159;
+}
+.no-scroll
+{
+    height: 100vh !important;
+    overflow-y: hidden !important;
+}
+.rating-star
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 15px;
+    border-radius: 8px;
+
+}
+
+.rating-star--border {
+    border: 1px solid #f2f2f2;
+}
+
+.modal-review .close
+{
+    cursor: pointer;
+    text-align: right;
+    display: block;
+    font-size: 22px;
+    margin-top: 20px;
+}
+.modal-review
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffff;
+    padding: 15px;
+}
+
+.review-img img {
+    border-radius: 6px;
+    width: 100%;
+}
+
+.rating p, .rating div
+{
+    color: #000000;
+}
+
+.error-text {
+    font-size: 14px;
+}
+
+.rating
+{
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.rating-title
+{
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.rating-description
+{
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+.rating-star-block
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 100px;
+}
+
+@media (max-width: 480px)
+{
+    .rating-title
+    {
+        font-size: 20px;
+    }
+
+}
+
+/* END NEW */
+
+
+
+
+
+
+
+
+
+
+
+#language-selected, #select-language-menu a
+{
+    font-size: 18px;
+}
+
+
+#select-language-menu
+{
+    display: flex;
+    flex-direction: column;
+}
+.social-links {
+    padding-left: 0px;
+    margin-top: 0px;
+    display: flex;
+    color: #FFF;
+    font-family: sans-serif;
+    width: 200px;
+    margin-bottom: 0px;
+
+}
+.navbar-nav .nav-item:last-child
+{
+    border-bottom: none;
+}
+
+.social-links a,  .social-links a:hover
+{
+    color: #696969;
+}
+.social-links li {
+
+    list-style-type: none !important;
+    padding-right: 20px;float:left !important;
+}
+#lang-form div {
+    float: left;
+    margin-top:1px;
+}
+
+#lang-form #dropdown-wrapper {
+    width: 100px;
+    margin-top: 20px;
+    z-index: 1000;
+}
+
+.dropdownbox {
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.dropdownbox > p {
+    display: block;
+    user-select: none;
+    -moz-user-select:none;
+    /* Safari */ -khtml-user-select: none;}
+
+ul.menu{
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    position: relative;
+    margin: 0 0;
+    width: 100px;
+    overflow: hidden;
+    height: 0;
+    margin-left: -37px;
+    margin-top: 2px;
+    -webkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+    /*-moz-transform:scale(0); */
+    color: #FFF;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select:none;
+    /* Safari */
+    -khtml-user-select: none;
+}
+
+ul.menu li {
+    padding: 2px 0;
+    -webkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+}
+
+ul.menu li:hover {
+    padding-left: 10px;
+    color:#2E408A;
+    /*background: #1F8EC1;*/
+}
+
+.menu.showMenu {
+    /*-moz-transform:scale(1);*/
+    height: 70px;
+}
+
+
+
+
+
+
+
+
+.line-lang
+{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.offcanvas-body a
+{
+    color: #696969;
+}
+.offcanvas-body a:hover
+{
+    color: #696969;
+    opacity: 0.9;
+}
+.btn-close
+{
+    color: #c2c2c2;
+}
+.btn-close:hover
+{
+    color: #c2c2c2 !important;
+    opacity: 0.9;
+}
+.lang
+{
+    background: -webkit-linear-gradient(135deg, rgb(0, 72, 143) 2%, rgb(127, 216, 231));
+    background: -moz-linear-gradient(135deg, rgb(0, 72, 143) 2%, rgb(127, 216, 231));
+    background: linear-gradient(135deg, rgb(0, 72, 143) 2%, rgb(127, 216, 231));
+    padding: 8px;
+    color: white;
+    border: 1px solid #c2c2c2;
+    border-radius: 5px;
+}
+
+.lang a
+{
+    font-size: 16px;
+    color: white;
+}
+.lang a:hover
+{
+    opacity: 0.8;
+    color: white;
+}
+
+
+
+.carousel-item {
+    height: 350px; /* Высота слайда */
+    position: relative;
+    overflow: hidden;
+}
+
+/*Можно добавить свой класс к изображению и заменить "img.d-block" ниже */
+
+.carousel-item > img.d-block{
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    position: absolute;
+}
+button {
+    cursor: pointer;
+}
+
+html
+{
+    overflow-x: hidden;
+}
+
+footer
+{
+    background-color: #15139a;
+}
+
+
+.navbar-light .navbar-toggler {
+    color: #c2c2c2;
+    border-color: #c2c2c2;
+}
+.navbar-light .navbar-toggler-icon
+{
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgb(194, 194, 194)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+
+}
+.btn-blue, .btn-blue:hover
+{
+    background-color: #15139a;
+    color: white;
+}
+.btn-blue:hover
+{
+    opacity: 0.95;
+}
+#in_rooms p
+{
+    color: #212529;
+}
+
+
+.info
+{
+    border: 1px solid #696969;
+    padding: 20px;
+    border-radius: 7px;
+
+
+}
+.restaurants p a
+{
+    color: #15139a;
+
+}
+.restaurants p a:hover
+{
+    opacity: 0.75;
+}
+
+.services .fa-solid
+{
+    font-size: 30px !important;
+}
+
+.services .fa-solid, .restaurants .fa-solid
+{
+
+    color: #15139a;
+}
+h1
+{
+    color: #333333;
+}
+.breadcrumb-item a:hover
+{
+    color: #696969;
+    opacity: 0.9;
+}
+
+
+p, ul li, .breadcrumb-item.active, .breadcrumb-item a
+{
+    font-size: 14px;
+    color: #696969;
+}
+
+hr
+{
+    opacity: 0.75 !important;
+}
+svg path
+{
+    stroke: #c2c2c2;
+    color: #c2c2c2;
+}
+
+header nav
+{
+    border-bottom: 1px solid #c2c2c2;
+}
+
+.but:hover
+{
+    color: white;
+}
+.navbar-nav .nav-item
+{
+    padding: 5px 0px;
+}
+
+.navbar-nav .nav-item
+{
+    border-bottom: 1px solid #c2c2c2;
+}
+
+.color-text-white
+{
+    color: white;
+}
+
+a
+{
+    text-decoration: none !important;
+}
+
+
+hr
+{
+    margin: 20px 0 !important;
+    width:310px !important;
+    border: 0 !important;
+    height: 3px !important;
+    border-radius:25px !important;
+    background-color: white !important;
+    -webkit-box-shadow: 0px 3px 10px 2px rgba(180, 141, 141, 0.22) !important;
+    -moz-box-shadow: 0px 3px 10px 2px rgba(0, 0, 0, 0.22) !important;
+    box-shadow: 0px 3px 10px 2px rgba(0, 0, 0, 0.22) !important;
+}
+
+
+
+
+
+
+/*конец основные*/
+/*Отзывы*/
+
+/*конец Отзывы*/
+/*Кнопки*/
+.but {
+    cursor: pointer;
+    display: block;
+    color: #ffff;
+    text-align: center;
+    text-decoration: none;
+    border: 4px solid white;
+    border-radius: 12px;
+    vertical-align: top;
+    background: -webkit-linear-gradient(135deg, rgb(0, 72, 143) 2%, rgb(127, 216, 231));
+    background: -moz-linear-gradient(135deg, rgb(0, 72, 143) 2%, rgb(127, 216, 231));
+    background: linear-gradient(135deg, rgb(0, 72, 143) 2%, rgb(127, 216, 231));
+    width:290px;
+    font-weight: bold;
+    margin: 20px auto;
+    padding: 20px 10px;
+    font-size: 18px;
+    transition: 0.4s;
+}
+.review
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#review-but
+{
+    width:290px;
+}
+.but:hover
+{
+    opacity:0.8;
+}
+.give-review
+{
+
+    background: -webkit-linear-gradient(135deg, rgb(254, 0, 0), rgb(255, 99, 0)) !important;
+    background: -moz-linear-gradient(135deg, rgb(254, 0, 0), rgb(255, 99, 0)) !important;
+    background: linear-gradient(135deg, rgb(254, 0, 0), rgb(255, 99, 0)) !important;
+}
+/* конец Кнопки*/
+/*Переключатель языка*/
+
+
+.but:disabled,
+.but[disabled]{
+
+    opacity:0.6;}
+
+
+
+
+
+
+
+
+
+
+
+
+/*Звезды*/
+.rating-area
+{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    overflow: hidden;
+    width: 265px;
+    margin: 0 auto;
+}
+.rating-area:not(:checked) > input {
+    display: none;
+}
+.rating-area:not(:checked) > label {
+    float: right;
+    width: 40px;
+    padding: 0;
+    cursor: pointer;
+    font-size: 40px;
+    line-height: 32px;
+    color: white;
+    text-shadow: 1px 1px #bbb;
+}
+.rating-area:not(:checked) > label:before {
+    content: '★';
+}
+.rating-area > input:checked ~ label {
+    color: gold;
+    text-shadow: 1px 1px #c60;
+}
+.rating-area:not(:checked) > label:hover,
+.rating-area:not(:checked) > label:hover ~ label {
+    color: gold;
+}
+.rating-area > input:checked + label:hover,
+.rating-area > input:checked + label:hover ~ label,
+.rating-area > input:checked ~ label:hover,
+.rating-area > input:checked ~ label:hover ~ label,
+.rating-area > label:hover ~ input:checked ~ label {
+    color: gold;
+    text-shadow: 1px 1px goldenrod;
+}
+.rate-area > label:active {
+    position: relative;
+}
+/*конец Звезды*/
+@media (min-width: 820px) and (max-width: 1400px) and (min-width: 650px)
+{
+    .rating-area
+    {
+        width: 18%;
+    }
+    .rating-area:not(:checked) > label
+    {
+        font-size: 30px !important;
+    }
+
+
+
+    .but
+    {
+        width: 100%;
+        padding: 15px;
+        margin: 10px auto;
+        font-size: 15px;
+    }
+
+    hr
+    {
+        width: 20%;
+        margin: 10px 0px;
+    }
+}
+
+@media (min-width: 200px) and (max-width: 400px)
+{
+
+    .carousel-item {
+        height: 230px; /* Высота слайда */
+        position: relative;
+        overflow: hidden;
+    }
+    .rating-area:not(:checked) > label
+    {
+        font-size: 30px;
+    }
+
+    .but, #review-but
+    {
+        width:90%;
+        font-size: 14px;
+    }
+
+    hr
+    {
+        margin: 10px;
+        width:220px;
+    }
+
+    .but
+    {
+        padding: 13px 10px;
+        margin: 10px auto;
+    }
+
+}
+@media (min-width: 400px) and (max-width: 768px)
+{
+    .but
+    {
+        width:300px;
+        font-size: 16px;
+
+    }
+
+
+    .but
+    {
+        margin: 10px auto;
+    }
+    hr
+    {
+        width:250px;
+    }
+}
