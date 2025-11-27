@@ -9,7 +9,6 @@ use Telegram\Bot\Exceptions\TelegramSDKException;
 class ServiceNotificationFactory
 {
     private const string TELEGRAM_SERVICE = 'telegram';
-    private const string EMAIL_SERVICE = 'email';
 
     /**
      * Создание сервиса
@@ -17,15 +16,14 @@ class ServiceNotificationFactory
      * @param App $app
      * @param Feedback $feedback
      *
-     * @return EmailService|TelegramService
+     * @return TelegramService
      *
      * @throws TelegramSDKException
      */
-    static function create(App $app, Feedback $feedback): EmailService|TelegramService
+    static function create(App $app, Feedback $feedback): TelegramService
     {
         return match ($app->name) {
             self::TELEGRAM_SERVICE => new TelegramService($app, $feedback),
-            self::EMAIL_SERVICE => new EmailService($app, $feedback)
         };
     }
 }
